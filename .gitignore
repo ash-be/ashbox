@@ -1,0 +1,30 @@
+# Byte-code files
+*.pyc
+__pycache__/
+
+# Django 임시 파일 및 시스템 파일
+*.sqlite3
+db.sqlite3
+/media
+/static
+
+# 가상 환경 (Virtual Environment)
+venv/
+env/
+
+# 운영체제 생성 파일
+.DS_Store # macOS
+Thumbs.db # Windows
+
+# --- 보안
+# 환경 변수 파일 (SECRET_KEY, DB 정보 등 포함)
+.env
+.local.env
+
+# 로컬 설정 파일
+# settings.py에서 민감 정보를 분리했다면 해당 파일명을 여기에 추가
+settings_local.py
+
+# idea
+.vscode/
+.idea/
