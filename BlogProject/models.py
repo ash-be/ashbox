@@ -28,7 +28,9 @@ class SoftDeleteModel(BaseModel):
     class Meta:
         abstract = True
 
-
+    # note | auto_now vs auto_now_add option
+    # auto_now : 수정될 때마다 즉, save() 호출 시마다 갱신
+    # auto_now_add : 최초 생성 시
 
     # note | Meta class
     # model의 meta data를 담는 클래스 > jpa에서의 각종 어노테이션들
