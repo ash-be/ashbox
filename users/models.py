@@ -1,14 +1,28 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from BlogProject.models import SoftDeleteModel
 
 # Create your models here.
 
-class User(SoftDeleteModel):
-    # id = models.AutoField(primary_key=True)
+class User(SoftDeleteModel, AbstractUser):
+    username = None
+
+    # nullable 재정의
+    first_name = models.CharField(max_length=150, blank=True, null=True)
+    last_name = models.CharField(max_length=150, blank=True, null=True)
+
+    # unique 값 재정의
     email = models.EmailField(unique=True, null=False, max_length=100)
-    password = models.CharField(max_length=100)
+
+    # is_staff / is_active AbstractUser 상속
+    # SoftDelModel-BaseModel의 created_at 사용
+    date_joined = None
+
     nickname = models.CharField(unique=True, null=False, max_length=100)
-    role = models.CharField(null=False, default="USER", max_length=100)
+
+    # USERNAME_FIELD 재정의
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["nickname"]
 
     def __str__(self):
         return self.email
@@ -49,3 +63,54 @@ class User(SoftDeleteModel):
     # note | blank option
     # null = DB 차원에서의 null 값 허용 여부
     # blank = Django 차원에서의
+
+    # note | AbstractUser
+    # Django Auth를 유지하면서 아예 새로운 User를 만들고 싶다면
+    # -> AbstractBaseUser 상속 및 커스텀
+
+    # EMAIL_FIELD = "email"
+    # USERNAME_FIELD = "username" > "email"
+    #       : 로그인 시 사용하는 주요 식별자로 unique=True여야 함
+    # REQUIRED_FIELDS = ["email"] > ["nickname"]
+    #       : 필수로 입력받아야 하는 데이터
+    #
+
+    """
+        username_validator = UnicodeUsernameValidator()
+
+        username = models.CharField(
+            _("username"),
+            max_length=150,
+            unique=True,
+            help_text=_(
+                "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+            ),
+            validators=[username_validator],
+            error_messages={
+                "unique": _("A user with that username already exists."),
+            },
+        )
+        first_name = models.CharField(_("first name"), max_length=150, blank=True)
+        last_name = models.CharField(_("last name"), max_length=150, blank=True)
+        email = models.EmailField(_("email address"), blank=True)
+        is_staff = models.BooleanField(
+            _("staff status"),
+            default=False,
+            help_text=_("Designates whether the user can log into this admin site."),
+        )
+        is_active = models.BooleanField(
+            _("active"),
+            default=True,
+            help_text=_(
+                "Designates whether this user should be treated as active. "
+                "Unselect this instead of deleting accounts."
+            ),
+        )
+        date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
+    
+        objects = UserManager()
+    
+        EMAIL_FIELD = "email"
+        USERNAME_FIELD = "username"
+        REQUIRED_FIELDS = ["email"]
+    """
