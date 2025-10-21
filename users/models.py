@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from BlogProject.models import SoftDeleteModel
+from users.managers import UserManager
+
 
 # Create your models here.
 
@@ -23,6 +25,8 @@ class User(SoftDeleteModel, AbstractUser):
     # USERNAME_FIELD 재정의
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["nickname"]
+
+    objects = UserManager()
 
     def __str__(self):
         return self.email
