@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
+    "corsheaders",
 
     'articles.apps.ArticlesConfig',
     'custom_auth.apps.AuthConfig',
@@ -109,6 +110,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    "corsheaders.middleware.CorsMiddleware",
+    # "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = 'BlogProject.urls'
@@ -186,3 +190,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # custom user
 AUTH_USER_MODEL = 'users.User'
+
+# cors option
+# CORS_ALLOWED_ORIGINS = [
+#     "https://example.com",
+#     "https://sub.example.com",
+#     "http://localhost:8080",
+#     "http://127.0.0.1:9000",
+# ]
+# CORS_ALLOWED_ORIGIN_REGEXES = [
+#     r"^https://\w+\.example\.com$",
+# ]
+CORS_ALLOW_ALL_ORIGINS: True
