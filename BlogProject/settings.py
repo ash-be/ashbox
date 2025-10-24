@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     "corsheaders",
+    'drf_spectacular',
 
     'articles.apps.ArticlesConfig',
     'custom_auth.apps.AuthConfig',
@@ -51,7 +52,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
 
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 SIMPLE_JWT = {
@@ -202,3 +204,12 @@ AUTH_USER_MODEL = 'users.User'
 #     r"^https://\w+\.example\.com$",
 # ]
 CORS_ALLOW_ALL_ORIGINS: True
+
+# swagger
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Ashbox Proj API',
+    # 'DESCRIPTION': 'Your project description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
