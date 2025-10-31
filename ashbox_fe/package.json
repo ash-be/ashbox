@@ -1,0 +1,28 @@
+{
+  "name": "ashbox-frontend",
+  "version": "1.0.0",
+  "description": "A front-end application that communicates with the ashbox_be API.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "live-server public",
+    "build": "webpack --mode production",
+    "test": "jest"
+  },
+  "keywords": [
+    "frontend",
+    "javascript",
+    "api",
+    "ashbox"
+  ],
+  "author": "ash",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {
+    "webpack": "^5.24.4",
+    "webpack-cli": "^4.5.0",
+    "jest": "^26.6.0",
+    "live-server": "^1.2.1"
+  }
+}
